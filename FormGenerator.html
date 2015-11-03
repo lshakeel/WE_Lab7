@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Generate Form</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script>
+var newform;
+var btnsubmit;
+var textfield
+var passwordfield;
+var radiobtn;
+var count=0;
+var divform;
+function createForm(){
+
+if(count==1)
+{
+document.body.removeChild(divform);
+count=0;
+}
+count=1;
+divform=document.createElement("div");
+var formname = prompt("Please enter form name", "");
+var url = prompt("Please give the url to forward the result", "");
+
+
+
+newform=document.createElement("form");
+newform.name=formname;
+newform.id="myform";
+newform.action=url;
+btnsubmit= document.createElement("input");
+btnsubmit.type="submit";
+
+document.body.appendChild(newform);
+textfield=document.createElement("a");
+passwordfield=document.createElement("a");
+radiobtn=document.createElement("a");
+textfield.href="#";
+passwordfield.href="#";
+radiobtn.href="#";
+
+textfield.onclick=function(){
+ var textfieldname = prompt("Please enter field name", "");
+ var textfieldval = prompt("Enter defailt value", "");
+ 
+ var mylabel= document.createElement("label");
+ mylabel.appendChild(document.createTextNode(textfieldname));
+ mylabel.name=textfieldname+"label";
+ var textname = document.createElement("input");
+ textname.type="text";
+ textname.name= textfieldname;
+ textname.value=textfieldval;
+ 
+ newform.appendChild(mylabel);
+ newform.appendChild(textname);
+ }
+passwordfield.onclick=function(){
+ var passwordname = prompt("Please enter field name", "");
+ var passwordval = prompt("Enter default value", "");
+ 
+ var passlabel= document.createElement("label");
+ passlabel.appendChild(document.createTextNode(passwordname));
+ passlabel.name=passwordname+"label";
+ var passname = document.createElement("input");
+ passname.type="password";
+ passname.name= passwordname;
+ passname.value=passwordval;
+ 
+ newform.appendChild(passlabel);
+ newform.appendChild(passname);
+ }
+
+radiobtn.onclick=function(){
+ var numname = prompt("Please enter field name", "");
+ var numval = prompt("Enter default value", "");
+ 
+ var numlabel= document.createElement("label");
+ numlabel.appendChild(document.createTextNode(numname));
+ numlabel.name=numname+"label";
+ var numname = document.createElement("input");
+ numname.type="number";
+ numname.name= numname;
+ numname.value=numval;
+ 
+ newform.appendChild(numlabel);
+ newform.appendChild(numname);
+ }
+
+btnsubmit.onclick=function(){
+var formData = JSON.stringify(newform.serializeArray());
+console.log(formData);
+}
+
+
+newform.appendChild(btnsubmit);
+textfield.appendChild(document.createTextNode("Create Text Field"));
+passwordfield.appendChild(document.createTextNode("Create Password Field"));
+radiobtn.appendChild(document.createTextNode("Create Number Field"));
+divform.appendChild(newform);
+divform.appendChild(textfield);
+divform.appendChild(passwordfield);
+divform.appendChild(radiobtn);
+document.body.appendChild(divform);
+
+}
+
+
+
+</script>
+</head>
+<body>
+<a href="#" onclick="createForm()">Create New Form</a>
+</body>
+</html>
